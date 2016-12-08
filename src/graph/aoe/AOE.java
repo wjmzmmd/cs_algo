@@ -1,11 +1,10 @@
 package graph.aoe;
 
 /**
- * 基本的活动网络中关键路径算法
- * 1.Ee[0]=0,Ee[i]=max{Ee[j]+dur(Ej,Ei)}
+ * 基本的活动网络中关键路径算法 1.Ee[0]=0,Ee[i]=max{Ee[j]+dur(Ej,Ei)}
  * 2.El[n-1]=Ee[n-1],El[i]=min{El[j]-dur(Ei,Ej)}
- * 3.ak对应的带权有向边为(Ei,Ej),e[k]=Ee[i],l[k]=El[j]-dur(Ei,Ej)
- * Created by qin on 16-12-6.
+ * 3.ak对应的带权有向边为(Ei,Ej),e[k]=Ee[i],l[k]=El[j]-dur(Ei,Ej) Created by qin on
+ * 16-12-6.
  */
 public class AOE {
 
@@ -13,7 +12,7 @@ public class AOE {
 
     private static final int MAXM = 200; // 边数的最大值
 
-    class ArcNode{
+    class ArcNode {
         // 边节点结构
         int to, dur, no; // 边的另一个顶点， 持续时间，活动序号
         ArcNode next;
@@ -28,4 +27,33 @@ public class AOE {
     int[] El = new int[MAXN]; // 各事件最迟允许开始时间
     int[] e = new int[MAXM]; // 各活动最早可能开始时间
     int[] l = new int[MAXM]; // 各活动最迟允许开始时间
+
+    void criticalPath() {
+        // 拓扑排序求Ee
+        int i, j, k;
+        int top1 = -1;
+        ArcNode tmp1;
+        for (i = 0; i < n; i++) {
+            if (count1[i] == 0) {
+                count1[i] = top1;
+                top1 = i;
+            }
+        }
+        for (i = 0; i < n; i++) {
+            if (top1 == -1) {
+                System.out.println("Network has a cycle!");
+                return;
+            } else {
+                j = top1;
+                top1 = count1[top1];
+                tmp1 = list1[j];
+                while (tmp1 != null) {
+                    k = tmp1.to;
+                    if(--count1[k] == 0){
+
+                    }
+                }
+            }
+        }
+    }
 }
